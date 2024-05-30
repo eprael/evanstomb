@@ -4,10 +4,12 @@ This is a tile memory game based on a puzzle in the video game "Lego Indiana Jon
 
 The game is written in python and uses the pygame library.  
 
-TO INSTALL PYGAME:
-  Windows      : python -m pip install pygame
-  Raspberry Pi : pip install pygame
+### TO INSTALL PYGAME:
+  Windows      : python -m pip install pygame<br>
+  Raspberry Pi : pip install pygame<br>
+<br>
 
-TO RUN GAME:
-  run "__init__.py" from the root folder.
+
+### TO RUN GAME:
+  run [ \_\_init\_\_.py ] from the root folder.
 
