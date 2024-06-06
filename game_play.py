@@ -1,9 +1,27 @@
+"""
+GamePlay class
+----------------
+This class is responsible for the game play screen. It contains the game board
+and background objects. The game play screen is where the player interacts with
+the game. The player must repeat a sequence of tiles that the computer pulses.
+The player can use the arrow keys or mouse to select the tiles. The game play
+screen also contains the score and status messages. The game play screen can
+transition to the main menu or secret chamber screens.
+The update method is used to check for events and update the game state.
+The draw method is used to draw the game play screen on the screen.
+"""
+
+# system libraries
 import pygame, random
 from enum import Enum
+
+# game libraries
 from pygame_lib import Utils, ScreenFader, TextLine, Timer, Color
 from background import Background
 from game_board import GameBoard
 
+# game state
+# this is used to control the flow of the game
 class GameState(Enum):
     INIT = 1
     COMPUTER_TURN = 2
@@ -17,6 +35,10 @@ class GameState(Enum):
     SECRET_CHAMBER = 10
 
 class GamePlay:
+    # initialize the game play screen
+    # creates and controls the game board and background objects
+    # contains the game state and score
+    # uses other objects to control the screen like the screen fader
     def __init__(self, settings):
         self.settings = settings
         self.screen = pygame.display.get_surface()
@@ -42,6 +64,9 @@ class GamePlay:
         if self.background.update(events):
             self.set_game_state(GameState.GAME_EXIT)
 
+        # check for keyboard and mouse events
+        # and store them in a list
+        # this is used to control the game state
         player_events = []
         for event in events:
             if event.type == pygame.KEYDOWN:
@@ -110,6 +135,7 @@ class GamePlay:
             # self.cleanup()
             self.set_game_state(GameState.SECRET_CHAMBER)
 
+    # reset the game board and screen fader
     def cleanup(self):
         self.game_board.reset()
         self.screen_fader.reset()
@@ -117,6 +143,7 @@ class GamePlay:
         self.set_game_state(GameState.INIT)
         self.score = 0
 
+    # set the game state
     def set_game_state(self, state):
 
         self.game_state = state

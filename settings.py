@@ -1,7 +1,11 @@
-# The settings class is used to store global game variables and settings
-# that are used by the game screens. The settings class is passed to all the
-# game screens from the main program (Game_loop.py)
-# There are also functions at the bottom that return the full path to images, fonts, and sounds
+"""
+Settings.py
+-----------
+The settings class is used to store global game variables and settings and is passed to all the
+game screens from the main game loop (game_loop.py). Settings are shared and updating the settings
+in one screen will affect all screens.  The settings class also contains helper functions to
+return the full path to images, fonts, and sounds based on the directory the game is running from.
+"""
 
 import os
 from pygame import mixer
@@ -32,6 +36,7 @@ class Settings:
 
     # game text
     #-----------------------------------------
+    game_title = "Evan's Tomb"
 
     instructions = [ "Instructions:",
                      "1. Computer shows a sequence of symbols",
@@ -39,18 +44,20 @@ class Settings:
                      "3. A successful try unlocks a secret!"
                      ]
 
-    # each skill level gets its own win text
+    # game play
+    #-----------------------------------------
+    tiles_per_game_level = [4,5,6]  # 4 tiles for easy, 5 for medium, 6 for hard
+    wins_to_open_chamber = 1        # number of wins needed to open secret chamber
+
+    # each skill level gets its own win text (easy, medium, hard)
     # easy=artifacts, medium=Eye of Horus, Hard=Hidden Tomb
     win_text = [["You found a hidden artifact!","You uncovered an old mystery","You found a long lost toy!"],
                 ["You found a priceless artifact!", "You found the Eye of Ra! ","Someone's keeping an eye on you..."],
                 ["You've uncovered an ancient tomb!", "You found a room of treasure. But no way out! Goodbye!", "Someone died in here!"]]
 
 
-    # game text
-    #-----------------------------------------
-    game_title = "Evan's Tomb"
-
     # fonts
+    # these are truetype (.ttf) fonts and have to exist in the fonts folder
     #-----------------------------------------
     default_font = 'papyrus'
     instructions_font = 'calibri'
@@ -59,14 +66,14 @@ class Settings:
     # animations
     #-----------------------------------------
     pharao_speed = 1                    # 0=still, 5=fast
-    gameboard_zoomout_duration = 5      # 1=fast, 10=slow
-    tile_pulse_duration_per_level = [0.4,0.3,0.2]           # use 0.2-0.5 where 0.2=fast, 0.5=slow
+    gameboard_zoomout_duration = 4      # 1=fast, 10=slow
+    tile_pulse_duration_per_level = [0.35,0.25,0.2]           # use 0.2-0.5 where 0.2=fast, 0.5=slow
 
     # sounds
     #-----------------------------------------
     sound_fx_on = True
     background_music_on = True
-    initial_music_volume = 0.2
+    initial_music_volume = 0.3
     background_music_sound = "background - temple of light.ogg"
     tile_pulse_sounds = ["tile_pulse_1.ogg", "tile_pulse_2.ogg"]
     menu_hover_sound = "menu_hover.ogg"
@@ -78,20 +85,22 @@ class Settings:
 
     # internal game variables - don't change
     #-----------------------------------------
-    tiles_per_game_level = [4,5,6]
-    wins_to_open_chamber = 1
-    difficulty = 0
+    difficulty = 0                  # default setting, 0=easy, 1=medium, 2=hard
     score = 0
     background_music_available = False
     background_music_playing = False
     game_background = None
     supported_extensions = [".ogg", ".mp3", ".wav"]
     game_exit = False
+
     # table for sound files and sound objects
     loaded_sounds = {}
+
     # small, medium, large boards for different screen sizes
     patternboards = ["patternboard_440.png","patternboard_1000.png","patternboard_1680.png"]
+
     # game is designed for 800x480 screen, but will scale to other sizes
+    # scale is calculated in game_loop.py
     screen_scale_x = 1.0
     screen_scale_y = 1.0
 
@@ -151,7 +160,3 @@ class Settings:
             sound = self.loaded_sounds[sound_file_name]
 
         mixer.find_channel().play(sound)
-
-        # if self.settings.sound_fx_on:
-        #     sound = pygame.mixer.Sound(self.get_soundPath(self.sound_file))
-        #

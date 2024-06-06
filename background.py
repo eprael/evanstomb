@@ -1,3 +1,16 @@
+"""
+Background class
+----------------
+The background class is responsible for drawing the background of the game.
+It is shared by the game play and main menu screens.
+It contains the background wallpaper, pharaoh, torches, and the exit button.
+The background is drawn on the screen using the draw method.
+The update method is used to check for events and update the game state.
+The change_wallpaper method is used to change the background image randomly.
+The create_exit_button method is used to create the exit button.
+The draw method is used to draw the background on the screen.
+
+"""
 import pygame
 from pygame_lib import Button, Utils, Sprite, Color
 from pharaoh import Pharaoh

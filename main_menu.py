@@ -1,4 +1,16 @@
+"""
+main_menu.py
+----------------
+This module contains the MainMenu class which is the first screen the user sees
+after the splash screen. The main menu screen contains the game title, instructions,
+difficulty buttons, and sound buttons. The user can select the difficulty level
+and turn the music and sound effects on or off. The user can also exit the game
+from the main menu screen.
+"""
+# system libraries
 import pygame
+
+# game libraries
 from pygame_lib import Button, Utils, ScreenFader, TextLine, Color, RoundedRect
 from background import Background
 
@@ -33,9 +45,6 @@ class MainMenu:
 
         # setup semi transparent window for the instructions
         rect_width = 525 * self.settings.screen_scale_x
-        # rect_height = (self.instructions[0].rect.height+5) * self.settings.screen_scale_x
-        # rect_height = rect_height * (len(self.instructions) -2) + (20 * self.settings.screen_scale_y)
-        #rect_height = self.settings.instructions_font_size * (len(self.instructions)+1) * self.settings.screen_scale_y
         rect_height =  (self.instructions[0].rect.height + (10 * self.settings.screen_scale_y)) * len(self.instructions) + (15 * self.settings.screen_scale_y)
         border_width = 3 * self.settings.screen_scale_x
         self.instructions_window = RoundedRect(self.window, rect_width, rect_height,
@@ -251,8 +260,6 @@ class MainMenu:
         y = Utils.y_percent(self.window, 37)
 
         # draw rounded rectangle with semi-transparent background
-        # rect_x = Utils.x_percent(self.window,50)-(290*self.settings.screen_scale_x)
-        # self.window.blit(self.instructions_window, (rect_x, y - (10 * self.settings.screen_scale_y)))
         self.instructions_window.draw(self.window,
                                       Utils.x_percent(self.window,50)-(265*self.settings.screen_scale_x),
                                       y - (10 * self.settings.screen_scale_y))

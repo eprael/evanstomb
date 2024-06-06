@@ -1,6 +1,17 @@
+"""
+Pharaoh class
+----------------
+Loads an image of a pharaoh and moves it back and forth on the screen
+The animation is paused for a random time between 5 and 10 seconds. The pharaoh
+is flipped when it reaches the edge of its movement range. This range deliberately
+goes off the screen so the pharaoh disappears and reappears after a while.
+"""
+# system libraries
 import math
 import random
 import pygame
+
+# game libraries
 from pygame_lib import Utils, Timer
 
 class Pharaoh:

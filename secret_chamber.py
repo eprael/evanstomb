@@ -1,7 +1,18 @@
+"""
+Secret Chamber Screen
+---------------------
+This class handles the secret chamber screen that appears when the player
+wins the game. It displays a random image from the chamber folder
+and a random text line from a list of lines made for the current difficulty
+level (stored in the settings object). The player can click the continue button
+to return to the main menu. The screen fades in and out when it appears and disappears.
+"""
+
+# system libraries
 import pygame
 import random
-import os
 
+# game libraries
 from pygame_lib import Button, Utils, TextLine, ScreenFader, Color
 
 
@@ -38,10 +49,12 @@ class SecretChamber:
         else:
             hover_sound = ""
 
+        buttonColor=(188,113,55)
+        buttonColorHover=(214,150,89)
+
         return Button(self.window,text,
                        x, y, width, 0,
-                       (188,113,55), (214,150,89), Color.WHITE,
-                       #Color.BLUE, Color.LIGHT_BLUE, Color.WHITE,
+                       buttonColor, buttonColorHover , Color.WHITE,
                        self.default_font_path,30 * self.settings.screen_scale_x,
                        hover_sound,
                        self.settings.fps,
@@ -50,8 +63,6 @@ class SecretChamber:
 
 
     def update(self, events):
-
-
         for event in events:
             if event.type == pygame.KEYDOWN:
                 # exit game
@@ -74,15 +85,8 @@ class SecretChamber:
             backgroundPath = Utils.get_random_file_from_path(self.settings.get_imagePath("chamber/"+str(self.settings.difficulty)),True)
             self.background_img = Utils.load_image_to_fixed_height(backgroundPath, self.window.get_height() * 380 // 480, True)
             heading_text = self.settings.win_text[self.settings.difficulty][random.randint(0,2)]
-            # match self.settings.difficulty:
-            #     case 0: heading_text = "You found an Ancient Artifact!"
-            #     case 1: heading_text = "You found the Eye of Horus!"
-            #     case 2: heading_text = "You found a Hidden Tomb!"
-
             self.heading = TextLine(self.window, heading_text, Color.WHITE, self.default_font_path, 30 * self.settings.screen_scale_x , self.settings.fps, 2)
-            #self.settings.background_music("pause")
             self.settings.play_sound(self.settings.secret_chamber_sound)
-
 
         if self.screen_fader.fade_out_completed:
             self.reset()
@@ -97,9 +101,7 @@ class SecretChamber:
 
     def draw(self):
 
-        #self.window.blit(self.background_img, (0,0))
         # draw image centered on screen
-
         self.window.blit(self.background_img,
                         (self.window.get_width() // 2 - self.background_img.get_width() // 2,
                         self.window.get_height() // 2 - self.background_img.get_height() // 2 + 20))
@@ -111,20 +113,7 @@ class SecretChamber:
         self.heading.draw(-1, y)
         y += self.heading.rect.height -20
 
-        # self.heading2.draw(-1, y)
-        # y += self.heading2.rect.height
-
-        #self.score = TextLine(self.window, "Score:" + str(self.settings.score), Color.WHITE, self.default_font_path, 25, self.settings.fps, 2)
-        #self.score.draw(-1, y)
-        #y += self.score.rect.height + 10
-
-
         self.menu_button.draw()
-
-        # mouse_pos = pygame.mouse.get_pos()
-        # Utils.write_text(self.window, 'x:'+ str(mouse_pos[0])+
-        #                             ', y:'+str(mouse_pos[1]),
-        #                             0, 0, 0, 0, Color.WHITE, 'calibri', 10, 1)
 
         screen = pygame.display.get_surface()
         screen.blit(self.window, (0,0))

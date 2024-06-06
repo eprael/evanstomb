@@ -1,12 +1,7 @@
 """
-Evan's Pyramid
-Written by Evan Prael, May 2024
-
-Based on a tile puzzle in the game "Lego Indiana Jones: The Original Adventures"
-Sample video of the puzzle: https://www.youtube.com/watch?v=SUZGqFCxfzw&t=114s
-
-This is the main entry point for the game. It creates the game object and
-starts the game loop.  It also creates the game screens and links them
+Game Loop
+---------
+This is the main game loop.  It creates the game screens and links them
 together.  The screens are:
 
 - splash screen
@@ -37,17 +32,6 @@ from settings import Settings
 
 
 class GameLoop:
-    """
-    Represents a game console application.
-
-    Attributes:
-        settings: The game settings object.
-        splash_screen: The splash screen object.
-        main_menu: The main menu screen object.
-        game_play: The game play screen object.
-        secret_chamber: The secret chamber screen object.
-        current_screen: The currently active screen object.
-    """
 
     def __init__(self):
         """
@@ -93,7 +77,6 @@ class GameLoop:
         # link game screens to each other
         # each game screen needs to know about the other game screens
         # splash_screen -> main_menu -> game_play -> secret_chamber -> main_menu
-
         self.splash_screen.main_menu = self.main_menu
         self.main_menu.game_play = self.game_play
         self.game_play.main_menu = self.main_menu

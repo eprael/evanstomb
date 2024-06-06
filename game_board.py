@@ -1,4 +1,6 @@
 """
+Game Board
+----------
 This class is responsible for managing the game board. It is responsible for
 drawing the game board and the tiles. It also manages the zooming and fading
 effects for the game board. It also manages the tile lights and their pulsing
@@ -117,15 +119,11 @@ class GameBoard:
     def turn_off_selector(self, tile_number):
         self.tiles[tile_number-1].selector_off()
 
-#    def selector_is_on(self, tile_number):
-#        return self.tiles[tile_number-1].selectorOn
-
     def pulse_ended(self, tile_number):
         return self.tiles[tile_number-1].pulse_ended
 
     def pulse_started(self, tile_number):
         return self.tiles[tile_number-1].pulse_started
-
 
     def is_pulsing(self, tile_number):
         return self.tiles[tile_number-1].is_pulsing
