@@ -1,3 +1,13 @@
+"""
+tile_light.py
+-------------
+This module contains the TileLight class which is used to create the effect of a tile
+being lit up.  The tile lights can be turned on and off or pulsed. It has two display modes,
+one where the whole tile is lit up and the other where only the border of the tile is lit up.
+Lighting the whole tile indicates that the tile is selected.  The border only display mode
+displays it as a cursor and is used when the player moves around the board to select a tile.
+"""
+
 import pygame
 from pygame_lib import Fader
 
