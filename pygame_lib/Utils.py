@@ -1,6 +1,28 @@
+"""
+This is a general purpose utility class that contains a variety of useful
+functions that can be used in any pygame application. Functions are static
+and can be called without creating an instance of the class.
+
+The class contains functions to
+- get a random file from a directory,
+- get a text surface,
+- write text to the screen,
+- draw a centered image,
+- draw a centered image with a fixed size,
+- draw a centered image with a fixed height,
+- draw a centered image with a fixed width,
+- get the top left x,y coordinates for a centered area,
+- draw a rounded rectangle,
+- load an image,
+- load an image to a fixed size,
+- load an image to a fixed height,
+- load an image to a fixed width,
+- get a random item from a list,
+
+"""
+
 import os
 import pygame, random
-
 
 class Utils:
     @staticmethod

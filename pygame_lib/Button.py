@@ -1,3 +1,11 @@
+"""
+This is a general purpose button class that can be used to create buttons with
+text on them. The button can be sized to fit the text or a specific width and
+height can be set. The button can be centered on the screen or placed at a
+specific x,y coordinate. The button can have a hover color, text color, and
+button color. The button can have a border with a specific color, width, and
+radius. The button can also play a sound when hovered over.
+"""
 import pygame
 from .Fader import Fader
 
@@ -7,24 +15,24 @@ class Button:
     # x and y are the button's center coordinates
 
     def __init__(self, window, text,
-                 x, y, w, h, 
-                 button_color, hover_color, text_color, 
+                 x, y, w, h,
+                 button_color, hover_color, text_color,
                  font_path, font_size, hover_sound_path,
                  fps,
                  border_color, border_radius, border_width):
-        
+
         #self.window = pygame.display.get_surface()
         self.window = window
-        
+
         self.text = text
-        
+
         self.w = w
         self.h = h
         self.x = x
         self.y = y
         self.width=w
         self.height=h
-        self.button_area = pygame.Rect(x, y, w, h) 
+        self.button_area = pygame.Rect(x, y, w, h)
         self.sound_on = False
 
         self.button_color = button_color
@@ -70,15 +78,15 @@ class Button:
     def is_hovered(self):
         mouse_pos = pygame.mouse.get_pos()
         return self.button_area.collidepoint(mouse_pos)
-    
+
     # draw a rounded rectangle with border
-    def draw_rounded_rect(self,surface, 
-                          x, y, width, height, 
-                          color, 
+    def draw_rounded_rect(self,surface,
+                          x, y, width, height,
+                          color,
                           border_radius, border_width=0, border_color=(0, 0, 0)):
 
         # Create a rect to store the position and size of the rectangle
-        rect = pygame.Rect(x, y, width, height) 
+        rect = pygame.Rect(x, y, width, height)
 
         if border_width > 0:
             if border_radius > 0:
@@ -86,18 +94,18 @@ class Button:
                 pygame.draw.rect(surface, border_color, rect, border_radius=border_radius)
                 # Draw inner rectangle with fill color
                 pygame.draw.rect(surface, color, rect.inflate(-border_width*2, -border_width*2), border_radius=border_radius)
-            else:   
+            else:
 
                 # Draw outer rectangle with border color
                 pygame.draw.rect(surface, border_color, rect)
                 # Draw inner rectangle with fill color
                 pygame.draw.rect(surface, color, rect.inflate(-border_width*2, -border_width*2))
-        else: 
+        else:
             pygame.draw.rect(surface, color, rect, border_radius=border_radius)
 
 
 
-    # separting render and draw 
+    # separting render and draw
     # render creates the button while draw displays it
     # only if there is a change in hover state will the button be re-rendered
     def render(self):
@@ -114,7 +122,7 @@ class Button:
         self.button_rect = self.button_surf.get_rect()
 
         # x or y of -1 = centered on window
-        if self.x == -1: self.x = self.window.get_width() // 2 
+        if self.x == -1: self.x = self.window.get_width() // 2
         if self.y == -1: self.y = self.window.get_height() // 2
 
         # check if hover in progress and select appropriate color
@@ -125,14 +133,14 @@ class Button:
         # else draw regular rectangle with border
         if self.border_radius > 0:
             # draw rounded rectangle with border
-            self.draw_rounded_rect(self.button_surf, 
+            self.draw_rounded_rect(self.button_surf,
                                    # x,y,width,height
-                                   0, 0, self.width,self.height, 
+                                   0, 0, self.width,self.height,
                                    # color
                                    color_to_use,
                                    # border_radius, border_width, border_color
                                    self.border_radius,2,self.border_color)
-        
+
         else:
             # draw regular rectangle with border
             if self.border_width > 0:
@@ -142,7 +150,7 @@ class Button:
                 pygame.draw.rect(self.button_surf, color_to_use, self.button_surf.get_rect().inflate(-self.border_width*2, -self.border_width*2))
             else:
                 pygame.draw.rect(self.button_surf, color_to_use, self.button_surf.get_rect())
-                
+
         # center text surface on button surface and blit
         self.text_rect.center = self.button_rect.center
         self.button_surf.blit(self.text_surf, self.text_rect)
@@ -151,11 +159,11 @@ class Button:
         self.button_area = self.button_rect
         self.button_area.center = (self.x, self.y)
 
-    
+
 
     def draw (self):
 
-        # if change in hover re-render button 
+        # if change in hover re-render button
         if (self.is_hovered() != self.was_hovered):
             self.render()
             if self.is_hovered() and self.play_sound:
@@ -169,4 +177,3 @@ class Button:
 
     def is_clicked(self, coords):
         return self.button_area.collidepoint(coords)
-

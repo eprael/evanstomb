@@ -1,21 +1,22 @@
-# this is a general purpose Shrinker class to keep track of an zoom value while 
-# progressing through the game loop. It can be used to zoom in and out images,
-# surfaces, text, etc. 
-
+"""
+This is a general purpose class to keep track of a zoom value while
+progressing through the game loop. It can be used to zoom in and out images,
+surfaces, text, etc.
+"""
 
 class Zoomer:
     def __init__(self, fps, startZoom=100):
         # check that zoom value is between 0 and 100
-        self.initial_zoom = max(0, min(100, startZoom)) 
+        self.initial_zoom = max(0, min(100, startZoom))
         self.fps = fps
         self.reset()
-        
+
 
     def reset(self, startZoom=-1):
 
         if startZoom == -1: self.zoom = self.initial_zoom
         else:               self.zoom = startZoom
-            
+
         self.target_zoom = 0
         self.zoom_step = 0
         self.zoom_in_started = False
@@ -33,10 +34,10 @@ class Zoomer:
 
         if not self.zoom_in_started:
             self.zoom_in_started = True
-            if startZoom != -1: 
+            if startZoom != -1:
                 self.zoom = startZoom
             self.target_zoom = targetZoom
-            self.zoom_step = (abs(self.target_zoom - self.zoom)) / (duration * self.fps) 
+            self.zoom_step = (abs(self.target_zoom - self.zoom)) / (duration * self.fps)
             #self.zoom_step = 1 / (duration * self.fps)
 
     # zooms out the zoom value of the Shrinker
@@ -49,13 +50,13 @@ class Zoomer:
 
         if not self.zoom_out_started:
             self.zoom_out_started = True
-            if startZoom != -1: 
-                self.zoom = startZoom   
+            if startZoom != -1:
+                self.zoom = startZoom
             self.target_zoom = targetZoom
-            self.zoom_step = -(abs(self.target_zoom - self.zoom)) / (duration * self.fps) 
+            self.zoom_step = -(abs(self.target_zoom - self.zoom)) / (duration * self.fps)
             temp=0
 
-           
+
 
     def is_zooming(self):
         return ((self.zoom_in_started and not self.zoom_in_ended) or
@@ -74,7 +75,7 @@ class Zoomer:
 
         return self.zoom
 
-    
+
     def set_zoom(self, zoom):
         self.zoom = zoom
         self.zoom_step = 0

@@ -1,6 +1,11 @@
+"""
+Sprite class for animating spritesheets in Pygame.
+The class loads a spritesheet, extracts frames from it,
+and animates the frames at a specified frame rate.
+"""
+
 import math
 import pygame
-import os
 
 from .Utils import Utils
 

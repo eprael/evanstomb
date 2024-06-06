@@ -1,6 +1,12 @@
+"""
+This is a general purpose rounded rectangle class that can be used to create
+rounded rectangles with a border and an inside color. The rounded rectangle
+can be faded in and out. The rounded rectangle can be drawn at a specific
+x,y coordinate or centered on the screen. The rounded rectangle can have a
+specific width, height, border color, border width, and inside color.
+"""
 import pygame
 from .Fader import Fader
-
 
 class RoundedRect:
     def __init__(self, window,

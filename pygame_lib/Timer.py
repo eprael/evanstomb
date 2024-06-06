@@ -1,4 +1,6 @@
-# Desc: Timer class to measure elapsed time in milliseconds
+"""
+This is a general purpose Timer class to measure elapsed time in milliseconds.
+"""
 import pygame
 
 class Timer:

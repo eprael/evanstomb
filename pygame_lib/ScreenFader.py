@@ -1,9 +1,13 @@
+"""
+This is a general purpose screen fader class that can be used to fade the screen
+in and out. The class fades the whole screen by adding a surface overtop the
+existing screen and changing the alpha value of the surface.
+The surface can be any color, so you can fade to black, white, etc.
+"""
+
 import pygame
 
 class ScreenFader:
-    # fades the whole screen by adding a surface overtop the
-    # existing screen and changing the alpha value of the surface.
-    # The surface can be any color, so you can fade to black, white, etc.
     def __init__(self, fps):
         self.screen = pygame.display.get_surface()
         self.fps = fps

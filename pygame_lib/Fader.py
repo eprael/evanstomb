@@ -1,7 +1,8 @@
-# this is a general purpose fader class to keep track of an alpha value while 
-# progressing through the game loop. It can be used to fade in and out images,
-# surfaces, text, etc. 
-
+"""
+This is a general purpose fader class to keep track of an alpha value while
+progressing through the game loop. It can be used to fade in and out images,
+surfaces, text, etc.
+"""
 
 class Fader:
     def __init__(self, fps, startAlpha=255):
@@ -9,13 +10,13 @@ class Fader:
         self.initial_alpha = max(0, min(255, int(startAlpha)))
         self.fps = fps
         self.reset(self.initial_alpha)
-        
+
 
     def reset(self, startAlpha=-1):
 
         if startAlpha == -1: self.alpha = self.initial_alpha
         else:                self.alpha = startAlpha
-            
+
         self.target_alpha = 0
         self.alpha_step = 0
         self.fade_in_started = False
@@ -33,10 +34,10 @@ class Fader:
 
         if not self.fade_in_started:
             self.fade_in_started = True
-            if startAlpha != -1: 
+            if startAlpha != -1:
                 self.alpha = startAlpha
             self.target_alpha = targetAlpha
-            self.alpha_step = (abs(self.target_alpha - self.alpha)) / (duration * self.fps) 
+            self.alpha_step = (abs(self.target_alpha - self.alpha)) / (duration * self.fps)
             #self.alpha_step = 1 / (duration * self.fps)
 
     # fades out the alpha value of the fader
@@ -49,11 +50,11 @@ class Fader:
 
         if not self.fade_out_started:
             self.fade_out_started = True
-            if startAlpha != -1: 
+            if startAlpha != -1:
                 self.alpha = startAlpha
             self.target_alpha = targetAlpha
-            self.alpha_step = -(abs(self.target_alpha - self.alpha)) / (duration * self.fps) 
-           
+            self.alpha_step = -(abs(self.target_alpha - self.alpha)) / (duration * self.fps)
+
 
     def is_fading(self):
         return ((self.fade_in_started and not self.fade_in_ended) or
@@ -72,7 +73,7 @@ class Fader:
 
         return self.alpha
 
-    
+
     def set_alpha(self, alpha):
         self.alpha = alpha
         self.alpha_step = 0

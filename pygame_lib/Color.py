@@ -1,4 +1,6 @@
-# Color class - a collection of color constants
+"""
+Color class - a collection of color constants
+"""
 
 class Color:
     BLACK = (0, 0, 0)
@@ -44,4 +46,3 @@ class Color:
     DARK_MAGENTA = (139, 0, 139)
 
     TRANSPARENT = (0, 0, 0, 0)
-

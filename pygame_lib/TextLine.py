@@ -1,3 +1,10 @@
+"""
+This is a general purpose text line class that can be used to display text on
+the screen. The text can be faded in and out. The text can be drawn at a
+specific x,y coordinate or centered on the screen. The text can have a shadow
+with a specific offset and color. The text can have a specific color, font,
+and font size. The text can be faded in and out.
+"""
 import pygame
 from .Fader import Fader
 
