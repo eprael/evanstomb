@@ -1,3 +1,10 @@
+"""
+SplashPage screen
+This is the first screen that is displayed when the game is launched. It displays
+the game title and a random image from the splash folder. The screen fades in and
+out when it appears and disappears. The player can skip the screen by pressing
+the a key or clicking the mouse.
+"""
 import pygame
 from pygame.locals import *
 from pygame_lib import Utils, TextLine, ScreenFader, Timer, Color
